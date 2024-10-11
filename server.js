@@ -32,8 +32,13 @@ app.get('/', (req, res) => {
         </script>
       </head>
       <body>
-        <h1 class='text-red-500 text-[10px] bg-[#00FF00] w-[50%] p-[10px] hover:bg-[#0000FF]'>Hello World!</h1>
-        <p class='text-white bg-black'>White on black</p>
+        <section class="section-display">
+          <div class="section-base">
+            <h1 class='text-red-500 text-[10px] bg-[#00FF00] w-[50%] p-[10px] hover:bg-[#0000FF]'>Hello World!</h1>
+            <p class='text-white bg-black'>White on black</p>
+            <button class="btn">Test Button</button>
+          </div>
+        </section>
         <script>
           fetch(
             "http://localhost:3000/",
