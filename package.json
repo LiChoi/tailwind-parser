@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/LiChoi/tailwind-parser#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13"

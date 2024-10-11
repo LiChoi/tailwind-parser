@@ -1,15 +1,20 @@
 // server.js
 const express = require('express');
-const app = express();
-const port = 3000;
+const cors = require('cors'); // Only needed to allow cors for testing purposes when using local endpoint on staging
 const postcss = require('postcss');
 const tailwindcss = require('tailwindcss');
 const baseConfig = require('./tailwind.config');
 
+const app = express();
+const port = 3000;
+
 const sourceCSS = '@tailwind base; @tailwind components; @tailwind utilities';
 
-app.use(express.json());
+app.use(cors()); // Only needed to allow cors for testing purposes when using local endpoint on staging
 
+app.use(express.json({ limit: "1mb" })); // Need to define limit, otherwise the default will set very small limit of size of payload
+
+// This route is just to test locally if specific tailwind styles are applying
 app.get('/', (req, res) => {
   const htmlResponse = `
     <!DOCTYPE html>
@@ -28,13 +33,14 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <h1 class='text-red-500 text-[10px] bg-[#00FF00] w-[50%] p-[10px] hover:bg-[#0000FF]'>Hello World!</h1>
+        <p class='text-white bg-black'>White on black</p>
         <script>
           fetch(
             "http://localhost:3000/",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ htmlFragment: document.querySelector("h1").outerHTML })
+              body: JSON.stringify({ htmlFragment: document.querySelector("body").outerHTML })
             }
           ).then((res) => res.json()).then((data) => {
             applyStyles(data.css);
