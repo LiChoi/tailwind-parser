@@ -37,6 +37,10 @@ app.get('/', (req, res) => {
             <h1 class='text-red-500 text-[10px] bg-[#00FF00] w-[50%] p-[10px] hover:bg-[#0000FF]'>Hello World!</h1>
             <p class='text-white bg-black'>White on black</p>
             <button class="btn">Test Button</button>
+            <div class="flex w-full">
+              <span class="w-[40px] bg-[#FF0000]">Finite</span>
+              <span class="grow-[1] bg-[#00FF00]">Fill</span>
+            </div>
           </div>
         </section>
         <script>
