@@ -6,7 +6,7 @@ const tailwindcss = require('tailwindcss');
 const baseConfig = require('./tailwind.config');
 
 const app = express();
-const port = 3000;
+const port = 9876;
 
 const sourceCSS = '@tailwind base; @tailwind components; @tailwind utilities';
 
@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
         </section>
         <script>
           fetch(
-            "http://localhost:3000/",
+            "http://localhost:${port}/",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
