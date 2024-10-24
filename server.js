@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors'); // Only needed to allow cors for testing purposes when using local endpoint on staging
 const postcss = require('postcss');
 const tailwindcss = require('tailwindcss');
-const baseConfig = require('./tailwind.config');
+const generateConfig = require('./tailwind.config');
 
 const app = express();
 const port = 9876;
@@ -12,7 +12,7 @@ const sourceCSS = '@tailwind base; @tailwind components; @tailwind utilities';
 
 app.use(cors()); // Only needed to allow cors for testing purposes when using local endpoint on staging
 
-app.use(express.json({ limit: "1mb" })); // Need to define limit, otherwise the default will set very small limit of size of payload
+app.use(express.json({ limit: "10mb" })); // Need to define limit, otherwise the default will set very small limit of size of payload
 
 // This route is just to test locally if specific tailwind styles are applying
 app.get('/', (req, res) => {
@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 app.post("/", (req, res) => {
   const data = req.body;
   const config = {
-    presets: [baseConfig],
+    ...(generateConfig(data.theme || {})),
     content: [{ raw: data.htmlFragment }],
   };
   postcss([tailwindcss(config)])
