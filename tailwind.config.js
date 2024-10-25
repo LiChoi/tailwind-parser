@@ -1,6 +1,9 @@
 const Values = require("values.js");
 
 const generateConfig = (theme = {}) => {
+  const sectionPadding = theme.apply_default_padding
+    ? "py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
+    : `px-[${theme.horizontal_padding_mobile}${theme.padding_unit_type}] sm:px-[${theme.horizontal_padding_desktop}${theme.padding_unit_type}] py-[${theme.vertical_padding_mobile}${theme.padding_unit_type}] sm:py-[${theme.vertical_padding_desktop}${theme.padding_unit_type}]`;
   const primaryColor = new Values(theme.color_primary || "#4263eb");
   const primaryShades = primaryColor.all(18).map((shade) => shade.hexString());
 
@@ -33,6 +36,9 @@ const generateConfig = (theme = {}) => {
         const newUtilities = {
           ".section-base": {
             "@apply container": {}
+          },
+          ".section-padding": {
+            [`@apply ${sectionPadding} flex justify-center mx-auto`]: {}
           },
           ".section-display": {
             "@apply flex justify-center mx-auto": {}
